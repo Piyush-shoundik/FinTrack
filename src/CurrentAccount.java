@@ -6,7 +6,7 @@ public class CurrentAccount extends Account {
         super(accountNumber, name, age, balance, "CURRENT");
     }
 
-    double overdraftLimit(){
+    double getoverdraftLimit(){
         return overdraftLimit;
     }
 
@@ -15,7 +15,7 @@ public class CurrentAccount extends Account {
     }
 
     public static void main(String[] args){
-        
+
     }
     
 }

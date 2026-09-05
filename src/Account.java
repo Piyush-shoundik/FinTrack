@@ -34,11 +34,14 @@ class Account {
         }
 
         //account type
-        if(accountType.equalsIgnoreCase("Savings") || accountType.equalsIgnoreCase("Current")){
+        if(accountType.equalsIgnoreCase("Savings") ||
+        accountType.equalsIgnoreCase("Current") ||
+        accountType.equalsIgnoreCase("FIXED_DEPOSIT") ||
+        accountType.equalsIgnoreCase("SALARY")) {
             this.accountType = accountType;
         }
-        else{
-            throw new IllegalArgumentException("must of type savings and current");
+        else {
+            throw new IllegalArgumentException("Invalid account type");
         }
 
         //minimum balance rule
@@ -182,7 +185,7 @@ class Account {
         return true;
     }
 
-    private double getMinimumBalance(){
+    double getMinimumBalance(){
         if(this.accountType.equalsIgnoreCase("savings") ){
             return MIN_BALANCE_SAVINGS;
         }
@@ -191,8 +194,7 @@ class Account {
         }
     }
 
-
-    private void validateActive() throws InactiveAccountException{
+    void validateActive() throws InactiveAccountException{
         if(status.equalsIgnoreCase("inactive")){
             throw new InactiveAccountException("Account is not active");
         }
