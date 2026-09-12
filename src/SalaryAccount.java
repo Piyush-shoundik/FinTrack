@@ -1,4 +1,4 @@
-public class SalaryAccount extends Account {
+public class SalaryAccount extends AbstractAccount {
 
     private String employerName;
     private int inactiveMonths;
@@ -15,5 +15,14 @@ public class SalaryAccount extends Account {
 
     public int getInactiveMonths() {
         return inactiveMonths;
+    }
+    
+    @Override 
+    void processDebit(double amount)throws AccountException{
+        if(amount > this.balance){
+            throw new InsufficientBalanceException("Insufficient balance");
+        }
+        
+        balance -= amount;
     }
 }

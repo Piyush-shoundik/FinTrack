@@ -1,4 +1,4 @@
-public class CurrentAccount extends Account {
+public class CurrentAccount extends AbstractAccount {
     
     private double overdraftLimit = 25000.0;
     
@@ -14,8 +14,37 @@ public class CurrentAccount extends Account {
         this.overdraftLimit = overdraftLimit;
     }
 
+    @Override
+    void processDebit(double amount) throws AccountException{
+        if(amount > overdraftLimit){
+            throw new InsufficientBalanceException("Insufficient balance");
+        }
+
+        this.balance -= amount;
+    }
+
+    @Override
+    void withdraw(double amount, int pin) throws AccountException {
+        if(verifyPin(pin) == false){
+            throw new InvalidPinException("Invalid Pin");
+        }
+        if(getStatus().equalsIgnoreCase("inactive")) {
+            throw new InactiveAccountException("Account is inactive");
+        }
+        if (amount > this.balance + overdraftLimit){
+            throw new InsufficientBalanceException ("Insufficient limit");
+        }
+        if (amount <= 0) {
+            throw new InvalidAmountException("Amount should be greater than 0");
+        }
+
+        this.balance -= amount;
+
+    }
+
     public static void main(String[] args){
 
     }
+
     
 }

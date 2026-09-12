@@ -1,4 +1,4 @@
-public class FixedDepositAccount extends Account {
+public class FixedDepositAccount extends AbstractAccount {
 
     private int tenureMonths;
     private double interestRate;
@@ -21,5 +21,19 @@ public class FixedDepositAccount extends Account {
 
     double getIntrestRate(){
         return interestRate;
+    }
+
+    @Override 
+    void withdraw(double amount, int pin) throws AccountException {
+        throw new AccountException ("Premature Withdraw are not allowed");
+    }
+
+   @Override
+    void processDebit(double amount)
+            throws AccountException {
+
+        throw new AccountException(
+            "Cannot withdraw before maturity"
+        );
     }
 }
