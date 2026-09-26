@@ -1,88 +1,49 @@
-import java.util.*;
 public class TestAccount {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        AbstractAccount[] accounts = {
+            new SavingsAccount(101, "Piyush", 20, 10000),
+            new CurrentAccount(102, "Rahul", 25, 20000),
+            new SalaryAccount(103, "Aman", 22, 30000)
+        };
 
-        System.out.println("=== Activity 9: Account Subclasses Test ===");
+        accounts[0].setPin(1234);
+        accounts[1].setPin(5678);
+        accounts[2].setPin(1111);
 
-        
-        SavingsAccount savings =
-        new SavingsAccount(101, "Piyush", 20, 10000);
-
-        //setting pin
-        System.out.println("Enter the pin");
-        int pin = sc.nextInt();
-        savings.setPin(pin);
-        
-        try {
-        System.out.println("Withdraw amount");
-        int amount = sc.nextInt();
-
-        savings.withdraw(amount, pin);
-
-        System.out.println(
-                "[Savings] Withdraw " + amount +
-                " | Balance: Rs " + savings.getBalance()
+        transferFunds(
+            accounts[0],
+            accounts[1],
+            2000,
+            1234
         );
 
-        } catch (AccountException e) {
-        System.out.println(
-                "[Savings] Error: " + e.getMessage()
-        );
-        }
+    } 
+    static void transferFunds(
+            AbstractAccount source,
+            AbstractAccount destination,
+            double amount,
+            int pin) {
 
         try {
-                savings.withdraw(8000, pin);
 
-                System.out.println(
-                        "[Savings] Withdraw below min balance: FAILED"
-                );
+            source.withdraw(amount, pin);
+
+            destination.deposit(amount);
+
+            System.out.println(
+                "Transfer successful: Rs " + amount
+            );
 
         } catch (AccountException e) {
-                System.out.println(
-                        "[Savings] Withdraw below min balance: " +
-                        "Caught MinimumBalanceViolationException [PASS]"
-                );
+
+            System.out.println(
+                "Transfer failed: " + e.getMessage()
+            );
         }
-
-
-
-        }
-
+    }
 }
 
-        // SavingsAccount savings =
-        //         new SavingsAccount(101, "Piyush", 20, 10000);
 
-        // System.out.println("Savings Account Created: Balance Rs "
-        //         + savings.getBalance()
-        //         + " | Min Balance: Rs "
-        //         + savings.getminBalance());
-
-
-        // CurrentAccount current =
-        //         new CurrentAccount(102, "Piyush", 20, 15000);
-
-        // System.out.println("Current Account Created: Overdraft Limit Rs "
-        //         + current.getoverdraftLimit());
-
-
-        // FixedDepositAccount fixed = new FixedDepositAccount(103, "Piyush", 20,50000, 12, 6.5);
-
-        // System.out.println("Fixed Deposit Created: Tenure " 
-        // + fixed.getTenureMonths() 
-        // + " months | Interest: " 
-        // + fixed.getIntrestRate() + "%");
-
-
-        // SalaryAccount salary = new SalaryAccount(104, "Piyush", 20,
-        //                 30000, "Infosys");
-
-        // System.out.println("Salary Account Created: Employer "
-        //         + salary.getEmployerName());
-
-        // System.out.println("All subclasses instantiated successfully!");
-//     }
     

@@ -3,9 +3,9 @@ public class SalaryAccount extends AbstractAccount {
     private String employerName;
     private int inactiveMonths;
 
-    public SalaryAccount(int accountNumber, String name, int age, double balance, String employerName) {
+    public SalaryAccount(int accountNumber, String name, int age, double balance) {
         super(accountNumber, name, age, balance, "SALARY");
-        this.employerName = employerName;
+        this.employerName = name;
         this.inactiveMonths = 0;
     }
 
