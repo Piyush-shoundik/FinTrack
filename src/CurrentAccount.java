@@ -24,7 +24,7 @@ public class CurrentAccount extends AbstractAccount {
     }
 
     @Override
-    void withdraw(double amount, int pin) throws AccountException {
+    public void withdraw(double amount, int pin) throws AccountException {
         if(verifyPin(pin) == false){
             throw new InvalidPinException("Invalid Pin");
         }

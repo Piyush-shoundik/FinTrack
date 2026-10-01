@@ -17,7 +17,7 @@ public class SavingsAccount extends AbstractAccount{
     }
 
     @Override
-    void withdraw(double amount, int pin)throws AccountException{
+    public void withdraw(double amount, int pin)throws AccountException{
         if(this.balance - amount < minBalance){
             throw new  MinimumBalanceViolationException("Minimum balance violation");
         }

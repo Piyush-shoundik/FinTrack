@@ -1,5 +1,5 @@
 
-public abstract class AbstractAccount {
+public abstract class AbstractAccount implements IAccount {
 
     //constants
     static final double MIN_BALANCE_SAVINGS = 500.0;
@@ -67,7 +67,7 @@ public abstract class AbstractAccount {
     }
 
     //deposit
-    void deposit(double amount) throws InvalidAmountException, InactiveAccountException {
+    public void deposit(double amount) throws InvalidAmountException, InactiveAccountException {
         if(status.equalsIgnoreCase("inactive")){
             throw new InactiveAccountException("Account in inactive");
         }
@@ -80,7 +80,7 @@ public abstract class AbstractAccount {
     }
 
     //withdraws
-    void withdraw(double amount, int pin)
+    public void withdraw(double amount, int pin)
             throws AccountException {
     
         if (this.pin == null) {
@@ -104,27 +104,27 @@ public abstract class AbstractAccount {
         processDebit(amount);
     }
 
-    int getAccountNumber(){
+    public int getAccountNumber(){
         return accountNumber;
     }
 
-    String getName(){
+    public String getName(){
         return name;
     }
 
-    int getAge(){
+    public int getAge(){
         return age;
     }
 
-    double getBalance(){
+    public double getBalance(){
         return balance;
     }
 
-    String getAccountType(){
+    public String getAccountType(){
         return accountType;
     }
 
-    String getStatus(){
+    public String getStatus(){
         return status;
     }
 

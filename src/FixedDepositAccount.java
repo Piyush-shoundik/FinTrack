@@ -24,7 +24,7 @@ public class FixedDepositAccount extends AbstractAccount {
     }
 
     @Override 
-    void withdraw(double amount, int pin) throws AccountException {
+    public void withdraw(double amount, int pin) throws AccountException {
         throw new AccountException ("Premature Withdraw are not allowed");
     }
 
